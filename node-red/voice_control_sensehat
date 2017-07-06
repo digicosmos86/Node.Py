@@ -1,1 +1,68 @@
-[{"id":"bbdca4db.091d08","type":"tab","label":"Voice-enabled SenseHAT control","disabled":false,"info":""},{"id":"bf81590.dd5dea8","type":"wiotp in","z":"bbdca4db.091d08","authType":"d","deviceKey":"ee213091.53951","deviceType":"","deviceId":"","command":"text","commandType":"g","qos":0,"name":"Google Assistant Command","x":140,"y":140,"wires":[["d01535c9.877a68"]]},{"id":"d01535c9.877a68","type":"function","z":"bbdca4db.091d08","name":"Process Data","func":"var msg = {\n    \"payload\": msg.payload.text,\n    \"color\": \"red\",\n    \"background\": \"off\",\n    \"speed\": 2\n};\nreturn msg;","outputs":1,"noerr":0,"x":423,"y":137,"wires":[["45b79807.700ef8"]]},{"id":"45b79807.700ef8","type":"rpi-sensehat out","z":"bbdca4db.091d08","name":"","x":659,"y":137,"wires":[]},{"id":"ee213091.53951","type":"wiotp-credentials","z":"","name":"SenseHAT","org":"ommnm2","serverName":"","devType":"sensehat","devId":"sensehat1","keepalive":"60","cleansession":true,"tls":"","usetls":false}]
+[
+  {
+    "id": "bbdca4db.091d08",
+    "type": "tab",
+    "label": "Voice-enabled SenseHAT control",
+    "disabled": false,
+    "info": ""
+  },
+  {
+    "id": "bf81590.dd5dea8",
+    "type": "wiotp in",
+    "z": "bbdca4db.091d08",
+    "authType": "d",
+    "deviceKey": "ee213091.53951",
+    "deviceType": "",
+    "deviceId": "",
+    "command": "text",
+    "commandType": "g",
+    "qos": 0,
+    "name": "Google Assistant Command",
+    "x": 140,
+    "y": 140,
+    "wires": [
+      [
+        "d01535c9.877a68"
+      ]
+    ]
+  },
+  {
+    "id": "d01535c9.877a68",
+    "type": "function",
+    "z": "bbdca4db.091d08",
+    "name": "Process Data",
+    "func": "var msg = {\n    \"payload\": msg.payload.text,\n    \"color\": \"red\",\n    \"background\": \"off\",\n    \"speed\": 2\n};\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 423,
+    "y": 137,
+    "wires": [
+      [
+        "45b79807.700ef8"
+      ]
+    ]
+  },
+  {
+    "id": "45b79807.700ef8",
+    "type": "rpi-sensehat out",
+    "z": "bbdca4db.091d08",
+    "name": "",
+    "x": 659,
+    "y": 137,
+    "wires": []
+  },
+  {
+    "id": "ee213091.53951",
+    "type": "wiotp-credentials",
+    "z": "",
+    "name": "SenseHAT",
+    "org": "ommnm2",
+    "serverName": "",
+    "devType": "sensehat",
+    "devId": "sensehat1",
+    "keepalive": "60",
+    "cleansession": true,
+    "tls": "",
+    "usetls": false
+  }
+]

@@ -1,2 +1,406 @@
-
-[{"id":"7252b0c0.31861","type":"tab","label":"MQTT-Dashboard","disabled":false,"info":""},{"id":"b13f1f3f.505e7","type":"ui_chart","z":"7252b0c0.31861","name":"","group":"ed33c14f.dfe79","order":0,"width":"6","height":"5","label":"Temperature/Humidity Chart","chartType":"line","legend":"true","xformat":"HH:mm:ss","interpolate":"linear","nodata":"No Data","ymin":"0","ymax":"100","removeOlder":1,"removeOlderPoints":"","removeOlderUnit":"3600","cutout":0,"colors":["#1f77b4","#aec7e8","#ff7f0e","#2ca02c","#98df8a","#d62728","#ff9896","#9467bd","#c5b0d5"],"x":861,"y":391,"wires":[[],[]]},{"id":"eee5d674.9437e8","type":"http response","z":"7252b0c0.31861","name":"","statusCode":"200","headers":{},"x":354,"y":343,"wires":[]},{"id":"2e3ff3dc.48e30c","type":"json","z":"7252b0c0.31861","name":"","pretty":"false","x":307,"y":414,"wires":[["5cf7a23b.f0e55c","167857b8.576bf8"]]},{"id":"5cf7a23b.f0e55c","type":"function","z":"7252b0c0.31861","name":"Temperature","func":"msg.payload = msg.payload.temperature;\nmsg.topic = \"Temperature\";\nreturn msg;","outputs":1,"noerr":0,"x":594,"y":311,"wires":[["b13f1f3f.505e7","16eb23cf.007e6c"]]},{"id":"167857b8.576bf8","type":"function","z":"7252b0c0.31861","name":"Humidity","func":"msg.payload = msg.payload.humidity;\nmsg.topic = \"Humidity\";\nreturn msg;","outputs":1,"noerr":0,"x":583,"y":415,"wires":[["b13f1f3f.505e7","646ef7ce.56bad8"]]},{"id":"16eb23cf.007e6c","type":"ui_gauge","z":"7252b0c0.31861","name":"Temperature Gauge","group":"ed33c14f.dfe79","order":0,"width":"3","height":"3","gtype":"gage","title":"Temperature","label":"Degrees Celsius","format":"{{value}}","min":"-40","max":"40","colors":["#00b500","#e6e600","#ca3838"],"seg1":"","seg2":"","x":834,"y":331,"wires":[]},{"id":"646ef7ce.56bad8","type":"ui_gauge","z":"7252b0c0.31861","name":"Humidity Gauge","group":"ed33c14f.dfe79","order":0,"width":"3","height":"3","gtype":"gage","title":"Humidity","label":"%","format":"{{value}}","min":"0","max":"100","colors":["#00b500","#e6e600","#ca3838"],"seg1":"40","seg2":"70","x":819,"y":452,"wires":[]},{"id":"9443583.dcc6ba8","type":"function","z":"7252b0c0.31861","name":"Outside Temperature","func":"msg.payload = msg.payload.tempc;\nmsg.topic = \"Temperature\";\n\nreturn msg;","outputs":1,"noerr":0,"x":542,"y":183,"wires":[["eca7d94f.01f068","f20fadf4.6694"]]},{"id":"eca7d94f.01f068","type":"ui_chart","z":"7252b0c0.31861","name":"Outside Chart","group":"e3b69c1c.e2516","order":0,"width":"6","height":"5","label":"Temperature/Humidity Chart","chartType":"line","legend":"true","xformat":"HH:mm:ss","interpolate":"linear","nodata":"No Data","ymin":"0","ymax":"100","removeOlder":1,"removeOlderPoints":"","removeOlderUnit":"3600","cutout":0,"colors":["#1f77b4","#aec7e8","#ff7f0e","#2ca02c","#98df8a","#d62728","#ff9896","#9467bd","#c5b0d5"],"x":815,"y":155,"wires":[[],[]]},{"id":"f20fadf4.6694","type":"ui_gauge","z":"7252b0c0.31861","name":"Temperature Gauge","group":"e3b69c1c.e2516","order":0,"width":"3","height":"3","gtype":"gage","title":"Temperature","label":"Degrees Celsius","format":"{{value}}","min":"-40","max":"40","colors":["#00b500","#e6e600","#ca3838"],"seg1":"","seg2":"","x":832,"y":210,"wires":[]},{"id":"5519642a.1623ac","type":"ui_gauge","z":"7252b0c0.31861","name":"Humidity Gauge","group":"e3b69c1c.e2516","order":0,"width":"3","height":"3","gtype":"gage","title":"Humidity","label":"%","format":"{{value}}","min":"0","max":"100","colors":["#00b500","#e6e600","#ca3838"],"seg1":"40","seg2":"70","x":822,"y":266,"wires":[]},{"id":"b7bff1bb.1bbe6","type":"function","z":"7252b0c0.31861","name":"Outside Humidity","func":"msg.payload = msg.payload.humidity;\nmsg.topic = \"Humidity\";\nreturn msg;","outputs":1,"noerr":0,"x":522,"y":241,"wires":[["eca7d94f.01f068","5519642a.1623ac"]]},{"id":"f99b0baf.8effb8","type":"openweathermap","z":"7252b0c0.31861","name":"Weather","wtype":"current","lon":"","lat":"","city":"Boston","country":"US","language":"en","x":291,"y":198,"wires":[["9443583.dcc6ba8","b7bff1bb.1bbe6"]]},{"id":"193d28a.722b8d7","type":"inject","z":"7252b0c0.31861","name":"","topic":"","payload":"","payloadType":"date","repeat":"20","crontab":"","once":false,"x":130,"y":200,"wires":[["f99b0baf.8effb8"]]},{"id":"9150a0f0.254e8","type":"comment","z":"7252b0c0.31861","name":"Get data from the sensor","info":"","x":149,"y":349,"wires":[]},{"id":"648963d1.d0270c","type":"comment","z":"7252b0c0.31861","name":"Get weather data from an external API","info":"","x":187,"y":155,"wires":[]},{"id":"8c72e547.7b3d38","type":"mqtt in","z":"7252b0c0.31861","name":"SensorData","topic":"/sensor1/readings","qos":"0","broker":"22823ac1.01ff96","x":110,"y":420,"wires":[["2e3ff3dc.48e30c"]]},{"id":"ed33c14f.dfe79","type":"ui_group","z":"","name":"Inside","tab":"6c24b160.91575","order":2,"disp":true,"width":"6"},{"id":"e3b69c1c.e2516","type":"ui_group","z":"","name":"Outside","tab":"6c24b160.91575","order":1,"disp":true,"width":"6"},{"id":"22823ac1.01ff96","type":"mqtt-broker","z":"","broker":"192.168.1.77","port":"1883","clientid":"","usetls":false,"compatmode":true,"keepalive":"60","cleansession":true,"willTopic":"","willQos":"0","willPayload":"","birthTopic":"","birthQos":"0","birthPayload":""},{"id":"6c24b160.91575","type":"ui_tab","z":"","name":"Data Dashboard","icon":"dashboard","order":1}]
+[
+  {
+    "id": "7252b0c0.31861",
+    "type": "tab",
+    "label": "MQTT-Dashboard",
+    "disabled": false,
+    "info": ""
+  },
+  {
+    "id": "b13f1f3f.505e7",
+    "type": "ui_chart",
+    "z": "7252b0c0.31861",
+    "name": "",
+    "group": "ed33c14f.dfe79",
+    "order": 0,
+    "width": "6",
+    "height": "5",
+    "label": "Temperature/Humidity Chart",
+    "chartType": "line",
+    "legend": "true",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "No Data",
+    "ymin": "0",
+    "ymax": "100",
+    "removeOlder": 1,
+    "removeOlderPoints": "",
+    "removeOlderUnit": "3600",
+    "cutout": 0,
+    "colors": [
+      "#1f77b4",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "x": 861,
+    "y": 391,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "eee5d674.9437e8",
+    "type": "http response",
+    "z": "7252b0c0.31861",
+    "name": "",
+    "statusCode": "200",
+    "headers": {},
+    "x": 354,
+    "y": 343,
+    "wires": []
+  },
+  {
+    "id": "2e3ff3dc.48e30c",
+    "type": "json",
+    "z": "7252b0c0.31861",
+    "name": "",
+    "pretty": "false",
+    "x": 307,
+    "y": 414,
+    "wires": [
+      [
+        "5cf7a23b.f0e55c",
+        "167857b8.576bf8"
+      ]
+    ]
+  },
+  {
+    "id": "5cf7a23b.f0e55c",
+    "type": "function",
+    "z": "7252b0c0.31861",
+    "name": "Temperature",
+    "func": "msg.payload = msg.payload.temperature;\nmsg.topic = \"Temperature\";\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 594,
+    "y": 311,
+    "wires": [
+      [
+        "b13f1f3f.505e7",
+        "16eb23cf.007e6c"
+      ]
+    ]
+  },
+  {
+    "id": "167857b8.576bf8",
+    "type": "function",
+    "z": "7252b0c0.31861",
+    "name": "Humidity",
+    "func": "msg.payload = msg.payload.humidity;\nmsg.topic = \"Humidity\";\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 583,
+    "y": 415,
+    "wires": [
+      [
+        "b13f1f3f.505e7",
+        "646ef7ce.56bad8"
+      ]
+    ]
+  },
+  {
+    "id": "16eb23cf.007e6c",
+    "type": "ui_gauge",
+    "z": "7252b0c0.31861",
+    "name": "Temperature Gauge",
+    "group": "ed33c14f.dfe79",
+    "order": 0,
+    "width": "3",
+    "height": "3",
+    "gtype": "gage",
+    "title": "Temperature",
+    "label": "Degrees Celsius",
+    "format": "{{value}}",
+    "min": "-40",
+    "max": "40",
+    "colors": [
+      "#00b500",
+      "#e6e600",
+      "#ca3838"
+    ],
+    "seg1": "",
+    "seg2": "",
+    "x": 834,
+    "y": 331,
+    "wires": []
+  },
+  {
+    "id": "646ef7ce.56bad8",
+    "type": "ui_gauge",
+    "z": "7252b0c0.31861",
+    "name": "Humidity Gauge",
+    "group": "ed33c14f.dfe79",
+    "order": 0,
+    "width": "3",
+    "height": "3",
+    "gtype": "gage",
+    "title": "Humidity",
+    "label": "%",
+    "format": "{{value}}",
+    "min": "0",
+    "max": "100",
+    "colors": [
+      "#00b500",
+      "#e6e600",
+      "#ca3838"
+    ],
+    "seg1": "40",
+    "seg2": "70",
+    "x": 819,
+    "y": 452,
+    "wires": []
+  },
+  {
+    "id": "9443583.dcc6ba8",
+    "type": "function",
+    "z": "7252b0c0.31861",
+    "name": "Outside Temperature",
+    "func": "msg.payload = msg.payload.tempc;\nmsg.topic = \"Temperature\";\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 542,
+    "y": 183,
+    "wires": [
+      [
+        "eca7d94f.01f068",
+        "f20fadf4.6694"
+      ]
+    ]
+  },
+  {
+    "id": "eca7d94f.01f068",
+    "type": "ui_chart",
+    "z": "7252b0c0.31861",
+    "name": "Outside Chart",
+    "group": "e3b69c1c.e2516",
+    "order": 0,
+    "width": "6",
+    "height": "5",
+    "label": "Temperature/Humidity Chart",
+    "chartType": "line",
+    "legend": "true",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "No Data",
+    "ymin": "0",
+    "ymax": "100",
+    "removeOlder": 1,
+    "removeOlderPoints": "",
+    "removeOlderUnit": "3600",
+    "cutout": 0,
+    "colors": [
+      "#1f77b4",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "x": 815,
+    "y": 155,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "f20fadf4.6694",
+    "type": "ui_gauge",
+    "z": "7252b0c0.31861",
+    "name": "Temperature Gauge",
+    "group": "e3b69c1c.e2516",
+    "order": 0,
+    "width": "3",
+    "height": "3",
+    "gtype": "gage",
+    "title": "Temperature",
+    "label": "Degrees Celsius",
+    "format": "{{value}}",
+    "min": "-40",
+    "max": "40",
+    "colors": [
+      "#00b500",
+      "#e6e600",
+      "#ca3838"
+    ],
+    "seg1": "",
+    "seg2": "",
+    "x": 832,
+    "y": 210,
+    "wires": []
+  },
+  {
+    "id": "5519642a.1623ac",
+    "type": "ui_gauge",
+    "z": "7252b0c0.31861",
+    "name": "Humidity Gauge",
+    "group": "e3b69c1c.e2516",
+    "order": 0,
+    "width": "3",
+    "height": "3",
+    "gtype": "gage",
+    "title": "Humidity",
+    "label": "%",
+    "format": "{{value}}",
+    "min": "0",
+    "max": "100",
+    "colors": [
+      "#00b500",
+      "#e6e600",
+      "#ca3838"
+    ],
+    "seg1": "40",
+    "seg2": "70",
+    "x": 822,
+    "y": 266,
+    "wires": []
+  },
+  {
+    "id": "b7bff1bb.1bbe6",
+    "type": "function",
+    "z": "7252b0c0.31861",
+    "name": "Outside Humidity",
+    "func": "msg.payload = msg.payload.humidity;\nmsg.topic = \"Humidity\";\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 522,
+    "y": 241,
+    "wires": [
+      [
+        "eca7d94f.01f068",
+        "5519642a.1623ac"
+      ]
+    ]
+  },
+  {
+    "id": "f99b0baf.8effb8",
+    "type": "openweathermap",
+    "z": "7252b0c0.31861",
+    "name": "Weather",
+    "wtype": "current",
+    "lon": "",
+    "lat": "",
+    "city": "Boston",
+    "country": "US",
+    "language": "en",
+    "x": 291,
+    "y": 198,
+    "wires": [
+      [
+        "9443583.dcc6ba8",
+        "b7bff1bb.1bbe6"
+      ]
+    ]
+  },
+  {
+    "id": "193d28a.722b8d7",
+    "type": "inject",
+    "z": "7252b0c0.31861",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "20",
+    "crontab": "",
+    "once": false,
+    "x": 130,
+    "y": 200,
+    "wires": [
+      [
+        "f99b0baf.8effb8"
+      ]
+    ]
+  },
+  {
+    "id": "9150a0f0.254e8",
+    "type": "comment",
+    "z": "7252b0c0.31861",
+    "name": "Get data from the sensor",
+    "info": "",
+    "x": 149,
+    "y": 349,
+    "wires": []
+  },
+  {
+    "id": "648963d1.d0270c",
+    "type": "comment",
+    "z": "7252b0c0.31861",
+    "name": "Get weather data from an external API",
+    "info": "",
+    "x": 187,
+    "y": 155,
+    "wires": []
+  },
+  {
+    "id": "8c72e547.7b3d38",
+    "type": "mqtt in",
+    "z": "7252b0c0.31861",
+    "name": "SensorData",
+    "topic": "/sensor1/readings",
+    "qos": "0",
+    "broker": "22823ac1.01ff96",
+    "x": 110,
+    "y": 420,
+    "wires": [
+      [
+        "2e3ff3dc.48e30c"
+      ]
+    ]
+  },
+  {
+    "id": "ed33c14f.dfe79",
+    "type": "ui_group",
+    "z": "",
+    "name": "Inside",
+    "tab": "6c24b160.91575",
+    "order": 2,
+    "disp": true,
+    "width": "6"
+  },
+  {
+    "id": "e3b69c1c.e2516",
+    "type": "ui_group",
+    "z": "",
+    "name": "Outside",
+    "tab": "6c24b160.91575",
+    "order": 1,
+    "disp": true,
+    "width": "6"
+  },
+  {
+    "id": "22823ac1.01ff96",
+    "type": "mqtt-broker",
+    "z": "",
+    "broker": "192.168.1.77",
+    "port": "1883",
+    "clientid": "",
+    "usetls": false,
+    "compatmode": true,
+    "keepalive": "60",
+    "cleansession": true,
+    "willTopic": "",
+    "willQos": "0",
+    "willPayload": "",
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthPayload": ""
+  },
+  {
+    "id": "6c24b160.91575",
+    "type": "ui_tab",
+    "z": "",
+    "name": "Data Dashboard",
+    "icon": "dashboard",
+    "order": 1
+  }
+]
