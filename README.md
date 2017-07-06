@@ -24,5 +24,10 @@ For ESP8266 with MicroPython
 * [Getting started with MicroPython on the ESP8266](https://docs.micropython.org/en/latest/esp8266/esp8266/tutorial/intro.html)
 * [MicroPython Reference on GitHub](https://github.com/micropython/micropython)
 
+ESP8266 GPIO Configuration
+![ESP8266GPIO](https://pradeepsinghblog.files.wordpress.com/2016/04/nodemcu_pins.png)
+
 For Node-Red
+
+
 
