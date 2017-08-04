@@ -1,11 +1,11 @@
 #### Defining a few variables
 
-username = ""
-password = ""
-from_address = ""
-to_address = ""
+username = "idesigns17bc@gmail.com"
+password = "hydroponics"
+from_address = "idesigns17bc@gmail.com"
+to_address = "digicosmos@gmail.com"
 
-def send_gmail(msg_content)  # define a message for easy accesss
+def send_gmail(msg_content)  # define a function for easy accesss
 
     import smtplib
     from email.message import EmailMessage
@@ -39,11 +39,11 @@ t = round(t, 1)
 h = round(h, 1)
 p = round(p, 1)
 
-last_alert = time.time()
+last_alert = None
 
 if t > 30:
     now = time.time()
-    if now - last_alert > 10 * 60:  # ten minutes
+    if last_alert is None or now - last_alert > 1 * 60:  # 1 minute
         send_gmail("Temperature is too high!!!")
         last_alert = now
     sense.show_message("Temperature: " + str(t) + "degrees C", text_colour = r)

@@ -55,14 +55,15 @@ class WaterLevelHandler:
                 "water_level": self.adc.read()
                 }
 
-class RainDropHandler:
+class SwitchHandler:
     p4 = None
     
     def __init__(self):
         from machine import Pin
-        self.p4 = Pin(4, Pin.IN)
+        self.p4 = Pin(4, Pin.OUT)
 
     def get(self, api_request):
-        return {
-                "rain_drop": self.p4.value()
-                }
+        if self.p4.value() == 0:
+            self.p4.on()
+        else:
+            self.p4.off()
