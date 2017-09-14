@@ -12,6 +12,20 @@
 # Do everything as root. I'm using fabric, but you can just
 # use the commands if you first run sudo -s
 
+# Enable Camera, VNC, SPI, I2C, etc.
+raspi-config nonint do_i2c 0
+raspi-config nonint do_spi 0
+raspi-config nonint do_camera 0
+raspi-config nonint do_serial 0
+
+# Uncomment if you want Raspberry Pis to work with old monitors
+sed -e 's/^hdmi_force_hotplug/^# hdmi_force_hotplug/' \
+    -e 's/^hdmi_group/^# hdmi_group' \
+    -e 's/^hdmi_mode/^# hdmi_mode' /boot/config.txt
+
+# Upgrade Node-RED and node.js
+bash <(curl -sL https://raw.githubusercontent.com/node-red/raspbian-deb-package/master/resources/update-nodejs-and-nodered)
+
 # Set locale to en_US.UTF-8
 cp /etc/locale.gen /etc/locale.gen.dist
 sed -i -e "/^[^#]/s/^/#/" -e "/en_US.UTF-8/s/^#//" /etc/locale.gen
@@ -36,4 +50,5 @@ cp /etc/default/keyboard /etc/default/keyboard.dist
 sed -i -e "/XKBLAYOUT=/s/gb/us/" /etc/default/keyboard
 service keyboard-setup restart
 
-sed -e "/s/hdmi_force_hotplug=1/#hdmi_force_hotplug=1/" /boot/config.txt
+# Expand linux partition
+raspi-config --expand-rootfs
