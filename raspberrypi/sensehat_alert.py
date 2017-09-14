@@ -5,7 +5,7 @@ password = "hydroponics"
 from_address = "idesigns17bc@gmail.com"
 to_address = "digicosmos@gmail.com"
 
-def send_gmail(msg_content)  # define a function for easy accesss
+def send_gmail(msg_content):  # define a function for easy accesss
 
     import smtplib
     from email.message import EmailMessage
