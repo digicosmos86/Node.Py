@@ -1,5 +1,5 @@
-SSID = 'BostonCollege'
-PASSWORD = ''
+SSID = 'pi3-AP'
+PASSWORD = 'raspberry'
 
 import gc
 gc.collect()

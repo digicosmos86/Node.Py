@@ -1,1 +1,0 @@
-Search.setIndex({docnames:["index"],envversion:53,filenames:["index.rst"],objects:{},objnames:{},objtypes:{},terms:{about:0,api:0,devic:0,find:0,here:0,how:0,inform:0,project:0,set:0,you:0,your:0},titles:["Welcome to the node.py documentation!"],titleterms:{document:0,node:0,welcom:0}})

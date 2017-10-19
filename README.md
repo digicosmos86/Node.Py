@@ -1,4 +1,4 @@
-# Node-Pi Code Repository
+# Node.Py Code Repository
 
 Welcome to Node-Pi Code Repository! Here you will find resources for your Node-Pi projects!
 

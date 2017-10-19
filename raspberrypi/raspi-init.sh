@@ -23,13 +23,7 @@ sed -e 's/^hdmi_force_hotplug/^# hdmi_force_hotplug/' \
     -e 's/^hdmi_group/^# hdmi_group/' \
     -e 's/^hdmi_mode/^# hdmi_mode/' /boot/config.txt
 
-# Upgrade Node-RED and node.js
-bash <(curl -sL https://raw.githubusercontent.com/node-red/raspbian-deb-package/master/resources/update-nodejs-and-nodered)
 
-# Install Node-RED nodes
-npm install -g node-red-dashboard
-npm install -g node-red-contrib-web-worldmap
-npm install -g node-red-contrib-python3-function
 
 # Set locale to en_US.UTF-8
 cp /etc/locale.gen /etc/locale.gen.dist
