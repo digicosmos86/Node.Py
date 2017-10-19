@@ -1,0 +1,1 @@
+Search.setIndex({envversion:46,filenames:["getstarted","index","raspi-setup"],objects:{},objnames:{},objtypes:{},terms:{content:1,index:1,modul:1,page:1,search:1},titles:["&lt;no title&gt;","Welcome to the Node.Py documentation!","&lt;no title&gt;"],titleterms:{document:1,indic:1,node:1,tabl:1,welcom:1}})
